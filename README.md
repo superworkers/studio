@@ -2,6 +2,24 @@
 
 A minimal static site build system with clean URLs and template support.
 
+## Architecture
+
+### Path mapping
+
+- `/src/home.html` + `home.css` + `home.js` → `/build/index.html` + `/build/home.css` + `/build/home.js`
+- `/src/faq.html` → `/build/faq/index.html`
+- `/src/faq/faq.html` + `faq.css` + `faq.js` → `/build/faq/index.html` + `/build/faq/faq.css` + `/build/faq/faq.js`
+- `/src/blog/post/post.html` + `post.css` → `/build/blog/post/index.html` + `/build/blog/post/post.css`
+
+### Path rules
+
+- No `index.*` files in src (only generated `index.html` in build)
+- CSS/JS files live as siblings to their HTML file
+- HTML filename must match folder name when folder exists
+- `home.html` at root is special: builds to `/build/index.html` with assets as `home.css`/`home.js`
+- Folderless HTML creates folder with `index.html` inside
+- Base URL is `/` by default, becomes `/repo/` when CNAME absent and `--dev` not passed
+
 ## Features
 
 - **Template system**: All HTML files use `layout.html` with `{template}` replacements
@@ -55,8 +73,24 @@ src/
 
 ## TODO
 
+### Components
+
+- [ ] app
+- [ ] colophon
+- [ ] dark mode
+- [ ] email capture
+- [ ] footer
+- [ ] hero
+- [ ] applet
+
 ### minterface.css
+
 - [ ] Rework heading line-heights
 - [ ] Add app vs marketing heading sizes
 - [ ] Standardize button styles
 - [ ] Consolidate border-radius values (0.5rem, 0.375rem, 50%) into CSS variable
+
+Inspiration
+
+- [base ui](https://base-ui.com)
+- [shadcn](https://ui.shadcn.com)
